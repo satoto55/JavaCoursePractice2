@@ -1,5 +1,6 @@
 /**
  * 従業員クラス
+ *
  * @author sato
  * @version 1.0.0
  */
@@ -17,6 +18,7 @@ public class Employee {
 
     /**
      * コンストラクタ
+     *
      * @param name            名前
      * @param lengthOfService 勤続年数
      */
@@ -27,6 +29,7 @@ public class Employee {
 
     /**
      * 名前の取得
+     *
      * @return name
      */
     public String getName() {
@@ -35,6 +38,7 @@ public class Employee {
 
     /**
      * 勤続年数の取得
+     *
      * @return
      */
     public int getLengthOfService() {

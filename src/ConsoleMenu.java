@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 /**
  * 入力メニューを制御するクラス
+ *
  * @author sato
  * @version 1.0.0
  */
@@ -32,14 +33,14 @@ public class ConsoleMenu {
     /**
      * メニューを初期化します
      */
-    public void init(){
+    public void init() {
         String menuNumber;
-        while(true){
-            try{
+        while (true) {
+            try {
                 // 選択メニューを表示して入力させる
                 menuNumber = this.selectMenu();
 
-                if (menuNumber.equals(ConsoleMenu.MENU_EXIT)){
+                if (menuNumber.equals(ConsoleMenu.MENU_EXIT)) {
                     // 99:アプリケーションを終了
                     System.out.println("アプリケーションを終了します");
                     break;
@@ -47,7 +48,7 @@ public class ConsoleMenu {
 
                 // メニューを呼び出し
                 callMenu(menuNumber);
-            }catch(IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
 
                 System.out.println(e.getMessage());
                 System.out.println("選択メニューに戻ります");
@@ -60,16 +61,17 @@ public class ConsoleMenu {
 
     /**
      * 該当のメニュー番号のメニューを呼び出します
+     *
      * @param menuNumber メニュー番号
      */
-    private void callMenu(String menuNumber) throws IllegalArgumentException{
+    private void callMenu(String menuNumber) throws IllegalArgumentException {
 
-        if (menuNumber.equals(ConsoleMenu.MENU_INPUT)){
+        if (menuNumber.equals(ConsoleMenu.MENU_INPUT)) {
             // 1:入力メニューを呼び出し
             this.inputEmployeeDate();
         }
 
-        if (menuNumber.equals(ConsoleMenu.MENU_PRINT)){
+        if (menuNumber.equals(ConsoleMenu.MENU_PRINT)) {
             // 2:従業員情報を表示
             this.printEmployeeDate();
         }
@@ -80,7 +82,7 @@ public class ConsoleMenu {
     /**
      * メニュー一覧を表示します
      */
-    private String selectMenu() throws IllegalArgumentException{
+    private String selectMenu() throws IllegalArgumentException {
         // 初期メッセージを表示
         System.out.println("従業員情報を管理します");
         System.out.println("1または2を入力してください");
@@ -94,7 +96,7 @@ public class ConsoleMenu {
 
         System.out.println("------------------------------------------------");
 
-        if (!this.isValidMenuNumber(menuNumber)){
+        if (!this.isValidMenuNumber(menuNumber)) {
             throw new IllegalArgumentException("メニュー番号は1、2、3のいずれかの値を入力してください");
         }
         return menuNumber;
@@ -103,7 +105,7 @@ public class ConsoleMenu {
     /**
      * 従業員情報入力メニューを呼び出します
      */
-    private void inputEmployeeDate() throws IllegalArgumentException{
+    private void inputEmployeeDate() throws IllegalArgumentException {
         System.out.println("従業員情報の入力を開始します");
 
         // 名前を入力する
@@ -114,23 +116,23 @@ public class ConsoleMenu {
         System.out.print("勤続年数を入力：");
         String lengthOfService = new Scanner(System.in).nextLine();
 
-        if (!this.isValidLengthOfService(lengthOfService)){
+        if (!this.isValidLengthOfService(lengthOfService)) {
 
             // 勤続年数が2桁の半角数字ではない場合、エラー
             throw new IllegalArgumentException("勤続年数は0～99の半角数字で入力してください");
         }
 
         // 値が正常な場合、リストに保存する
-        employeeDataList.add(new Employee(employeeName,Integer.valueOf(lengthOfService)));
+        employeeDataList.add(new Employee(employeeName, Integer.valueOf(lengthOfService)));
     }
 
     /**
      * 従業員情報を表示します
      */
-    private void printEmployeeDate(){
+    private void printEmployeeDate() {
         System.out.println("従業員情報を表示します");
 
-        if (this.employeeDataList.size() == 0){
+        if (this.employeeDataList.size() == 0) {
             System.out.println("入力情報は0件です");
 
             // 表示する情報がないため、終了
@@ -138,7 +140,7 @@ public class ConsoleMenu {
         }
 
         // リストをループして、入力した情報を表示する
-        for (Employee employee : this.employeeDataList){
+        for (Employee employee : this.employeeDataList) {
             System.out.println("名前：" + employee.getName());
             System.out.println("勤続年数：" + employee.getLengthOfService());
         }
@@ -146,19 +148,20 @@ public class ConsoleMenu {
 
     /**
      * 入力されたメニュー番号が妥当な値かチェックします
+     *
      * @param menuNumber 入力メニュー番号の入力値
      * @return true:妥当な値 false:不正な値
      */
     public boolean isValidMenuNumber(String menuNumber) {
-        if (menuNumber.equals(MENU_INPUT)){
+        if (menuNumber.equals(MENU_INPUT)) {
             return true;
         }
 
-        if (menuNumber.equals(MENU_PRINT)){
+        if (menuNumber.equals(MENU_PRINT)) {
             return true;
         }
 
-        if (menuNumber.equals(MENU_EXIT)){
+        if (menuNumber.equals(MENU_EXIT)) {
             return true;
         }
 
@@ -168,10 +171,11 @@ public class ConsoleMenu {
 
     /**
      * 勤続年数が2桁の半角数字かどうかチェックする
-     * @param lengthOfService 勤続年数　
+     *
+     * @param lengthOfService 勤続年数
      * @return true:妥当な値 false:不正な値
      */
     private boolean isValidLengthOfService(String lengthOfService) {
-        return lengthOfService.matches("^[1-9][0-9]?$");
+        return lengthOfService.matches("^[1-9]?[0-9]$");
     }
 }
