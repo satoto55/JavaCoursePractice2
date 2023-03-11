@@ -6,11 +6,6 @@
 public class Employee {
 
     /**
-     * 部門ID
-     */
-    private String departmentId;
-
-    /**
      * 名前
      */
     private String name;
