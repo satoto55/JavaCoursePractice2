@@ -8,9 +8,9 @@ public class Main {
     public static void main(String[] args) {
 
         // メニューオブジェクトを作成
-        ConsoleMenu menu = new ConsoleMenu();
+        Menu menu = new Menu();
 
-        // メニューを初期化する
-        menu.init();
+        // 実行開始する
+        menu.execute();
     }
 }

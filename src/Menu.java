@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @author sato
  * @version 1.0.0
  */
-public class ConsoleMenu {
+public class Menu {
 
     /**
      * 従業員データを保持するリスト
@@ -33,14 +33,14 @@ public class ConsoleMenu {
     /**
      * メニューを初期化します
      */
-    public void init() {
+    public void execute() {
         String menuNumber;
         while (true) {
             try {
                 // 選択メニューを表示して入力させる
-                menuNumber = this.selectMenu();
+                menuNumber = this.displayMenuList();
 
-                if (menuNumber.equals(ConsoleMenu.MENU_EXIT)) {
+                if (menuNumber.equals(Menu.MENU_EXIT)) {
                     // 99:アプリケーションを終了
                     System.out.println("アプリケーションを終了します");
                     break;
@@ -53,8 +53,6 @@ public class ConsoleMenu {
                 System.out.println(e.getMessage());
                 System.out.println("選択メニューに戻ります");
                 System.out.println("------------------------------------------------");
-                // メニュー番号が不正な場合はもう一度入力させる
-                continue;
             }
         }
     }
@@ -66,12 +64,12 @@ public class ConsoleMenu {
      */
     private void callMenu(String menuNumber) throws IllegalArgumentException {
 
-        if (menuNumber.equals(ConsoleMenu.MENU_INPUT)) {
+        if (menuNumber.equals(Menu.MENU_INPUT)) {
             // 1:入力メニューを呼び出し
             this.inputEmployeeDate();
         }
 
-        if (menuNumber.equals(ConsoleMenu.MENU_PRINT)) {
+        if (menuNumber.equals(Menu.MENU_PRINT)) {
             // 2:従業員情報を表示
             this.printEmployeeDate();
         }
@@ -82,7 +80,7 @@ public class ConsoleMenu {
     /**
      * メニュー一覧を表示します
      */
-    private String selectMenu() throws IllegalArgumentException {
+    private String displayMenuList() throws IllegalArgumentException {
         // 初期メッセージを表示
         System.out.println("従業員情報を管理します");
         System.out.println("1または2を入力してください");
@@ -123,7 +121,7 @@ public class ConsoleMenu {
         }
 
         // 値が正常な場合、リストに保存する
-        employeeDataList.add(new Employee(employeeName, Integer.valueOf(lengthOfService)));
+        employeeDataList.add(new Employee(employeeName, Integer.parseInt(lengthOfService)));
     }
 
     /**
